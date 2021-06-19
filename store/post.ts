@@ -4,8 +4,10 @@ import { BasePost, Post, Query } from '../schemas'
 import axiosCreator from '~/utils/axiosCreator'
 import { AxiosError } from 'axios'
 import process from 'process'
+import updateDetailInfo from '~/utils/updateDetailInfo'
 
 const BASE_URL = process.env.BASE_URL || 'http://localhost:8000'
+console.debug(process.env)
 
 let $axios = axiosCreator(
 	BASE_URL
@@ -55,7 +57,7 @@ export default class PostModule extends VuexModule {
 
 	@Action({ commit: 'setList'})
 	async fetchList() {
-		const token = this.context.rootGetters['user/getToken']
+		const token = this.context.rootState.user.token
 		console.debug(this.context)
 		const axios = axiosCreator(BASE_URL, token)
 		const res = await axios.get('/api/v1/posts')
@@ -68,8 +70,9 @@ export default class PostModule extends VuexModule {
 	}
 
 	@Action({})
-	async postPost(post: BasePost) {
-		const token = this.context.rootGetters['user/getToken']
+	async postPost(_post: BasePost) {
+		const post = await updateDetailInfo(_post)
+		const token = this.context.rootState.user.token
 		console.debug(this.context)
 		const axios = axiosCreator(BASE_URL, token)
 		const res = await axios.post('/api/v1/posts/',
@@ -78,8 +81,6 @@ export default class PostModule extends VuexModule {
 		.catch((e: AxiosError) => {
 			this.setError(e.message)
 		})
-		if (res?.status === 200) {
-			this.context.dispatch('post/fetchList')
-		}
+		this.context.dispatch('fetchList')
 	}
 }

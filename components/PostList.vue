@@ -36,7 +36,7 @@ export default class PostList extends Vue {
 		this.isNewPostShow = false
 	}
 
-	async fetch() {
+	async created() {
 		console.debug(this.$store)
 		await this.$store.dispatch('post/fetchList')
 	}

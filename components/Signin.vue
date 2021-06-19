@@ -81,6 +81,9 @@ export default class Signin extends Vue {
 		})
 	}
 
+	async created() {
+	}
+
 	get error () {
 		console.debug('get', this.$store.getters)
 		return this.$store.getters['user/getError']

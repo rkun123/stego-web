@@ -80,11 +80,24 @@ export default class UserModule extends VuexModule {
 		if (!res) throw Error('Signin failed')
 
 		const token = res.data.access_token as string
+		localStorage.setItem('stego-jwt', token)
 		$axios = axiosCreator(
 			BASE_URL,
 			token
 		)
 		await this.fetchMe()
+		return token
+	}
+
+	@Action({commit: 'setToken'})
+	async authByLocalStorage() {
+		const token = localStorage.getItem('stego-jwt')
+		if(token === null) return
+		$axios = axiosCreator(
+			BASE_URL,
+			token
+		)
+		this.context.dispatch('fetchMe')
 		return token
 	}
 

@@ -11,8 +11,6 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Watch } from 'nuxt-property-decorator'
-import Selector from './Selector.vue'
-import NumRangeBox from './NumRangeBox.vue'
 import { BasePost, Query, sortAttrOptions } from '~/schemas'
 
 @Component({
@@ -22,6 +20,7 @@ export default class NewPost extends Vue {
 	post: BasePost = {
 		content: '',
 		writing_time: 0,
+		images: []
 	}
 	close() {
 		this.$emit('close')
@@ -38,6 +37,7 @@ export default class NewPost extends Vue {
 	align-content: space-between;
 	background-color: #fff;
 	border-radius: 10px;
+	z-index: 2;
 }
 .header {
 	display: flex;

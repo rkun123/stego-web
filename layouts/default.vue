@@ -17,6 +17,12 @@ export default class Default extends Vue {
     const name = this.$route.name
     return name ? name : this.$route.path
   }
+
+  async mounted() {
+    if(this.$route.path === '/') return
+    await this.$store.dispatch('user/authByLocalStorage')
+    //if (!this.$store.getters['user/getToken']) this.$router.push('/')
+  }
 }
   
 </script>

@@ -17,11 +17,24 @@ export type User = {
 	updated_at: Date
 }
 
+export type BaseImage = {
+	image_url: string,
+	post_id: string
+}
+
+export type Image = {
+	image_url: string,
+	post_id: string,
+	post: Post,
+	created_at: Date,
+	updated_at: Date
+}
+
 export type BasePost = {
 	content: string,
 	reply_to_id: string,
 	temperature : number,
-	writing_time: Date,
+	writing_time: number,
 	lat?: number,
 	lng?: number,
 	elevation?: number,
@@ -31,6 +44,7 @@ export type BasePost = {
 	gyro_x?: number,
 	gyro_y?: number,
 	gyro_z?: number,
+	images: Image[]
 }
 
 export type Post = {
@@ -52,6 +66,7 @@ export type Post = {
 	gyro_z?: number,
 	seen_users: User[],
 	favorited_users: User[],
+	images: Image[]
 }
 
 export const sortAttrOptions = [ "writing_time", "birthday", "seen", "velocity", "elevation", "position" ] as const
