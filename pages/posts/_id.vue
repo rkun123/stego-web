@@ -3,7 +3,7 @@
 
 
 	<h2>Details</h2>
-		<p>temperature : 	</p>
+		<p>temperature : {{post.temperature}} </p>
 		<p>velocity : {{post.velocity}}	</p>
 		<p>direction : {{post.direction}}</p>
 		<p>elevation : {{post.elevation}}</p>
@@ -37,6 +37,7 @@ import { Post } from '~/schemas'
 export default class PostDetail extends Vue {
 	// for debug: Mock post
 	post: Post = {
+		temperature: 24,
 		id: 'hogefugahogefuga',
 		content: 'あいうえおかきくけこ',
 		content_length: 10,
@@ -86,6 +87,6 @@ export default class PostDetail extends Vue {
 </script>
 
 <style>
-
+	
 </style>
 

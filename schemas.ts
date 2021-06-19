@@ -18,6 +18,7 @@ export type User = {
 export type BasePost = {
 	content: string,
 	reply_to_id: string,
+	temperature : number,
 	writing_time: Date,
 	lat?: number,
 	lng?: number,
@@ -37,6 +38,7 @@ export type Post = {
 	user: User,
 	reply_to?: Post,
 	writing_time: number,
+	temperature : number,
 	lat?: number,
 	lng?: number,
 	elevation?: number,
