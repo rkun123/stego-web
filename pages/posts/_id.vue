@@ -1,23 +1,30 @@
 <template>
   <div>
 
+	<post-card :post="post" />
 
 	<h2>Details</h2>
-		<p>temperature : {{post.temperature}} </p>
-		<p>velocity : {{post.velocity}}	</p>
-		<p>direction : {{post.direction}}</p>
-		<p>elevation : {{post.elevation}}</p>
-		<p>latlng : {{post.lat}}/{{post.lng}}</p>
-
+		<post-info :post="post" />
+		
 	<h2>posted Data</h2>
-		<p>	{{post.user.created_at}}</p>
+		<p>	
+			{{post.user.created_at}}
+			<span v-if="post.user.created_at.getHours() >= 0 && post.user.created_at.getHours() < 6" id="morning" />
+			<span v-else-if="post.user.created_at.getHours() >= 6 && post.user.created_at.getHours() < 12" id="day" />
+			<span v-else-if="post.user.created_at.getHours() >= 12 && post.user.created_at.getHours() < 18" id="evening" />
+			<span v-else id="night" />
+		</p>
 
 	<h2>posting speed</h2>
 		<p>	{{post.user.created_at}}</p>
 
 	<h2> Favorite </h2>
-		<ul v-for="fav_user in post.favorited_users" v-bind:key="fav_user.id">
-			img : {{fav_user.avatar_url}}  username : {{fav_user.username}}
+		<ul class="fav-container" v-for="fav_user in post.favorited_users" v-bind:key="fav_user.id">
+			<!-- 黒点をなくす -->
+			<li class="fav-element">
+				<img class="fav-image" v-bind:src="fav_user.avatar_url">
+  				username : {{fav_user.username}}
+			</li>
 		</ul>
 
 
@@ -36,6 +43,8 @@ import { Post } from '~/schemas'
 @Component({})
 export default class PostDetail extends Vue {
 	// for debug: Mock post
+
+	
 	post: Post = {
 		temperature: 24,
 		id: 'hogefugahogefuga',
@@ -79,14 +88,57 @@ export default class PostDetail extends Vue {
 				date_of_birth: new Date(),
 				created_at: new Date(),
 				updated_at: new Date()
-			}
+			},
 		]
 	}
 }
 
 </script>
 
-<style>
-	
+<style scoped>
+
+	#morning{
+		content: url('https://api.iconify.design/vaadin:morning.svg?height=16');
+		vertical-align: -0.125em;
+	}
+
+	#day{
+		content: url('https://api.iconify.design/emojione-monotone:sun.svg?height=16');
+		vertical-align: -0.125em;
+	}
+
+	#evening{
+		content: url('https://api.iconify.design/vaadin:morning.svg?height=16');
+		vertical-align: -0.125em;
+	}
+
+	#night{
+		content: url('https://api.iconify.design/ic:baseline-mode-night.svg?height=24');
+		vertical-align: -0.125em;
+	}
+
+
+	.fav-container{
+		flex-direction: column;	
+	}
+
+	.fav-element{
+		left: 0%;
+		right: 0%;
+		top: 0%;
+		bottom: 0%;
+
+		background: #FFFFFF;
+		border: 1px solid rgba(0, 0, 0, 0.3);
+		box-sizing: border-box;
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+		border-radius: 3px;
+	}
+
+	.fav-image{
+		/*サイズ変更を一定化する*/
+		width: 20%;
+		height : 20%;
+	}
 </style>
 
