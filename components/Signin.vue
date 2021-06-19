@@ -13,6 +13,9 @@
 				<date-picker v-model="birthDate" />
 			</div>
 		</div>
+		<div>
+			{{ error }}
+		</div>
 		<div class="button-container">
 			<btn @click="signIn">Signin</btn>
 			<btn @click="signUp">Signup</btn>
@@ -27,6 +30,7 @@ import Btn from './Btn.vue'
 import ImagePicker from './ImagePicker.vue'
 import DatePicker from './DatePicker.vue'
 import { BaseUser } from '~/schemas'
+import { AxiosError } from 'axios'
 
 @Component({
 	components: {
@@ -50,12 +54,16 @@ export default class Signin extends Vue {
 
 	async signIn() {
 		console.debug(this.$store.hasModule('user'))
-		await this.$store.dispatch('user/signIn', {
-			username: this.username,
-			password: this.password
-		})
-		console.debug(this.$store.getters['users/me'])
-		console.debug(this.$store.getters)
+		try {
+			await this.$store.dispatch('user/signIn', {
+				username: this.username,
+				password: this.password
+			})
+			this.$router.push('./posts')
+		} catch(e) {
+			console.error(e)
+			this.$store.commit('user/setError', e)
+		}
 	}
 
 	async signUp() {
@@ -75,7 +83,7 @@ export default class Signin extends Vue {
 
 	get error () {
 		console.debug('get', this.$store.getters)
-		return this.$store.getters['user/error']
+		return this.$store.getters['user/getError']
 	}
 
 	get me () {
