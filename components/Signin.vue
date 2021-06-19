@@ -53,6 +53,10 @@ export default class Signin extends Vue {
 	}
 
 	async signIn() {
+		if (!(this.username && this.password)){
+			this.$store.commit('user/setError', 'Missing elements')
+			return
+		}
 		console.debug(this.$store.hasModule('user'))
 		try {
 			await this.$store.dispatch('user/signIn', {
@@ -67,6 +71,10 @@ export default class Signin extends Vue {
 	}
 
 	async signUp() {
+		if (!(this.username && this.password && this.email)){
+			this.$store.commit('user/setError', 'Missing elements')
+			return
+		}
 		console.debug(this.username, this.password, this.avatarFile, this.birthDate)
 		const baseUser: BaseUser = {
 			email: this.email,

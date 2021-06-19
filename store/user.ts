@@ -50,14 +50,16 @@ export default class UserModule extends VuexModule {
 
 	@Action({})
 	async createUser({ avatarFile, user }: {avatarFile: File, user: BaseUser}) {
-		console.debug('avatarPath', avatarFile.name)
-		const formData = new FormData()
-		formData.append('file', avatarFile)
-		formData.append('upload_preset', 'sns_avatar')
-		formData.append('tags', 'gs-vue,gs-vue-uploaded');
-		const avatar_res = await axios.post(`https://api.cloudinary.com/v1_1//dvmyw24ax/upload`, formData)
-		console.log(avatar_res)
-		user.avatar_url = avatar_res.data.url
+		if (avatarFile){
+			console.debug('avatarPath', avatarFile.name)
+			const formData = new FormData()
+			formData.append('file', avatarFile)
+			formData.append('upload_preset', 'sns_avatar')
+			formData.append('tags', 'gs-vue,gs-vue-uploaded');
+			const avatar_res = await axios.post(`https://api.cloudinary.com/v1_1//dvmyw24ax/upload`, formData)
+			console.log(avatar_res)
+			user.avatar_url = avatar_res.data.url
+		}
 		console.debug('avatar', user.avatar_url)
 		const res = await $axios.post(
 			`/api/v1/users/signup`,
