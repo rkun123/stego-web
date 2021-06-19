@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="wrapper">
-      <div class="container">
+    <div class="main-wrapper">
+      <div class="main-container">
         <h1 class="main-title">無駄に細かいSNS</h1>
         <Nuxt />
       </div>
@@ -69,7 +69,7 @@ html {
   background-color: #35495e;
 }
 
-.container {
+.main-container {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
@@ -96,7 +96,7 @@ html {
   padding-top: 15px;
 }
 
-.wrapper {
+.main-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
