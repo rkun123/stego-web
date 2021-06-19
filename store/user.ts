@@ -2,7 +2,7 @@ import { User, BaseUser } from '../schemas'
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 import axiosCreator from '~/utils/axiosCreator'
 import process from 'process'
-import { AxiosError } from 'axios'
+import axios, { AxiosError } from 'axios'
 import Vue from 'vue'
 
 const BASE_URL = process.env.BASE_URL || 'http://localhost:8000'
@@ -51,7 +51,13 @@ export default class UserModule extends VuexModule {
 	@Action({})
 	async createUser({ avatarFile, user }: {avatarFile: File, user: BaseUser}) {
 		console.debug('avatarPath', avatarFile.name)
-		user.avatar_url = await uploadAvatar(this.$cloudinary, avatarFile) as string
+		const formData = new FormData()
+		formData.append('file', avatarFile)
+		formData.append('upload_preset', 'sns_avatar')
+		formData.append('tags', 'gs-vue,gs-vue-uploaded');
+		const avatar_res = await axios.post(`https://api.cloudinary.com/v1_1//dvmyw24ax/upload`, formData)
+		console.log(avatar_res)
+		user.avatar_url = avatar_res.data.url
 		console.debug('avatar', user.avatar_url)
 		const res = await $axios.post(
 			`/api/v1/users/signup`,
@@ -110,19 +116,4 @@ export default class UserModule extends VuexModule {
 		return res.data as User
 	}
 
-}
-
-async function uploadAvatar($cloudinary: any, avatar: File) {
-	console.debug(Vue.prototype)
-	const reader = new FileReader()
-	reader.readAsDataURL(avatar)
-	return new Promise((resolve) => {
-		reader.addEventListener('load', async () => {
-			const res = await $cloudinary.upload( reader.result, {
-				'upload_preset': 'sns_avatar'
-			})
-			console.debug('res', res)
-			resolve(res.url)
-		})
-	})
 }
