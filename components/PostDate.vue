@@ -16,7 +16,7 @@ import { Component, Vue, Prop} from 'nuxt-property-decorator'
 import { Post } from '~/schemas'
 
 @Component({})
-export default class PostInfo extends Vue {
+export default class PostDate extends Vue {
 	@Prop({})
 	post!: Post
 }
