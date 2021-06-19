@@ -1,16 +1,16 @@
 <template>
 
 	<div class="PostCard">
-		<img class="PostCard-UserImage">
+		<img class="PostCard-UserImage" v-bind:src="post.user.avatar_url">
 
 		<span class="PostCard-UserDescription">
 			<h2 class="PostCard-UserDescription-Name">
-				hugahuga
+				C3太郎
 			</h2>
 			<ol class="PostCard-UserDescription-Contents">
+				<p>hogehogehogehogehogehogehogehoge</p>
+				<p>hugahugahugahugahugahuga</p>
 				<p>piyopiyo</p>
-				<p>piyopiyo</p>
-				<p>hogehoge</p>
 			</ol>
 		</span>
 	</div>
@@ -39,30 +39,36 @@ export default class PostInfo extends Vue {
 
     .PostCard{
         max-width: 100%;
-        background-color: red;
         display: flex;
         padding: 15px;
+		font-family: Noto Sans;
+		font-style: normal;
+
+		background-color: #FFF;
+		border-bottom: 1px solid;
     }
 
     .PostCard-UserImage{
         background-color: green;
         Width: 100px;
         Height: 100px;
+		filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+		border-radius: 3px;
     }
 
     .PostCard-UserDescription{
         width: 100%;
         flex: column;
-        background-color: blue;
+        background-color: white;
         padding-left: 15px;
     }
 
     .PostCard-UserDescription-Name{
-        background-color: peru;
+        background-color: white;
     }
 
     .PostCard-UserDescription-Contents{
-        background-color: purple;
+        background-color: white;
     }
 
 
