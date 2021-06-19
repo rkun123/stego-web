@@ -4,7 +4,7 @@ function axiosCreator(baseURL: string, token?: string): AxiosInstance {
 	return axios.create({
 		baseURL,
 		headers: {
-			'authoriztion': token ? 'Bearer ' + token : undefined
+			'authorization': token ? 'Bearer ' + token : undefined
 		}
 	})
 }

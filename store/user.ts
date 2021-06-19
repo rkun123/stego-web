@@ -3,7 +3,7 @@ import { MutationTree, ActionTree } from 'vuex'
 import axiosCreator from '~/utils/axiosCreator'
 import process from 'process'
 
-const BASE_URL = process.env.BASE_URL || 'https://localhost:8000'
+const BASE_URL = process.env.BASE_URL || 'http://localhost:8000'
 
 let $axios = axiosCreator(
 	BASE_URL
@@ -39,7 +39,7 @@ export const mutations: MutationTree<State> = {
 }
 
 export const actions: ActionTree<State, State> = {
-	async signIn({ commit }, { username, password }:{ username: string, password: string }) {
+	async signIn({ commit, dispatch }, { username, password }:{ username: string, password: string }) {
 		const params = new URLSearchParams()
 		params.append('username', username)
 		params.append('password', password)
@@ -59,5 +59,14 @@ export const actions: ActionTree<State, State> = {
 			BASE_URL,
 			token
 		)
+		dispatch('getMe')
 	},
+
+	async getMe({ commit }) {
+		const res = await $axios.get('/api/v1/users/me')
+		if (res.status !== 200) {
+			commit('setError', res.data)
+		}
+		commit('setMe', res.data as User)
+	}
 }
