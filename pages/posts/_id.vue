@@ -1,11 +1,8 @@
 <template>
+  
   <div>
-
-
 	<post-card :post="post" />
-	
 	<span class="PostDetail">
-		
 
 		<h2>Details</h2>
 		<span class="PostDetail-Element">
@@ -14,13 +11,7 @@
 		
 		<h2>posted Data</h2>
 		<span class="PostDetail-Element">
-			<p>	
-				{{post.user.created_at}}
-				<span v-if="post.user.created_at.getHours() >= 0 && post.user.created_at.getHours() < 6" id="morning" />
-				<span v-else-if="post.user.created_at.getHours() >= 6 && post.user.created_at.getHours() < 12" id="day" />
-				<span v-else-if="post.user.created_at.getHours() >= 12 && post.user.created_at.getHours() < 18" id="evening" />
-				<span v-else id="night" />
-			</p>
+			<post-date :post="post" />
 		</span>
 
 		<h2>posting speed</h2>
@@ -99,11 +90,9 @@ export default class PostDetail extends Vue {
 		]
 	}
 }
-
 </script>
 
 <style scoped>
-
 
 	*{
         padding: 0px;
@@ -129,29 +118,6 @@ export default class PostDetail extends Vue {
         background-color: purple;
         padding: 10px;
     } 
-
-
-
-	/* 以下パッケージ化するべきか悩む部分 */
-	#morning{
-		content: url('https://api.iconify.design/vaadin:morning.svg?height=16');
-		vertical-align: -0.125em;
-	}
-
-	#day{
-		content: url('https://api.iconify.design/emojione-monotone:sun.svg?height=16');
-		vertical-align: -0.125em;
-	}
-
-	#evening{
-		content: url('https://api.iconify.design/vaadin:morning.svg?height=16');
-		vertical-align: -0.125em;
-	}
-
-	#night{
-		content: url('https://api.iconify.design/ic:baseline-mode-night.svg?height=24');
-		vertical-align: -0.125em;
-	}
 
 </style>
 
