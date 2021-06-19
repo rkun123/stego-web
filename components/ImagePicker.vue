@@ -4,8 +4,9 @@
 			class="image-picker"
 			type='file'
 			accept="image/png, image/jpeg"
+			:required="inputRequired"
 			:name="inputPlaceholder"
-			@input="onValueChanged"
+			@change="onValueChanged"
 			:value="value"
 			>
 	</div>
@@ -14,19 +15,21 @@
 import { Component, Prop, Model, Vue } from 'nuxt-property-decorator'
 
 @Component({})
-export default class TextBox extends Vue {
+export default class ImagePicker extends Vue {
 	@Prop({ default: 'text'})
 	inputType!: 'text' | 'password'
 
 	@Prop({ default: 'input...' })
 	inputPlaceholder!: string
 
-	@Model('change') value!: string
+	@Prop({ default: false})
+	inputRequired!: boolean
 
 	public onValueChanged(e: InputEvent) {
-		console.debug(e)
 		const input = e.target as HTMLInputElement
-		this.$emit('change', input.value)
+		const file = input.files?.item(0)
+		console.debug('event', file)
+		this.$emit('change', file)
 	}
 }
 </script>

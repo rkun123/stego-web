@@ -23,6 +23,9 @@ export const state = (): State => ({
 export const getters = {
 	me: (state: State) => {
 		return state.me
+	},
+	error: (state: State) => {
+		return state.error
 	}
 }
 
@@ -47,7 +50,11 @@ export const actions: ActionTree<State, State> = {
 		const res = await $axios.post(
 			`${BASE_URL}/api/v1/users/token`,
 			params
-		)
+		).catch(e => {
+			console.error(e)
+			return
+		})
+		if (!res) return
 
 		if (res.status !== 200) {
 			commit('setError', res.data)
@@ -68,5 +75,37 @@ export const actions: ActionTree<State, State> = {
 			commit('setError', res.data)
 		}
 		commit('setMe', res.data as User)
-	}
+	},
+
+	async createUser({ dispatch, state}, { avatarFile, user }: {avatarFile: File, user: BaseUser}) {
+		console.debug('avatarPath', avatarFile.name)
+		user.avatar_url = await uploadAvatar(this.$cloudinary, avatarFile) as string
+		console.debug('avatar', user.avatar_url)
+		const res = await this.$axios.post(
+			`${BASE_URL}/api/v1/users/signup`,
+			user,
+			{
+				headers: {
+					'content-type': 'application/json'
+				}
+			}
+		).catch(e => {
+			console.error(e)
+			this.commit('setError', 'Failed')
+		})
+	},
+
 }
+	async function uploadAvatar($cloudinary: any, avatar: File) {
+		const reader = new FileReader()
+		reader.readAsDataURL(avatar)
+		return new Promise((resolve) => {
+			reader.addEventListener('load', async () => {
+				const res = await $cloudinary.upload( reader.result, {
+					'upload_preset': 'sns_avatar'
+				})
+				console.debug('res', res)
+				resolve(res.url)
+			})
+		})
+	}

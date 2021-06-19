@@ -2,6 +2,7 @@
 	<div class="text-box">
 		<input
 			class="text-input"
+			:required="inputRequired"
 			:type="inputType"
 			:placeholder="inputPlaceholder"
 			@input="onValueChanged"
@@ -19,6 +20,9 @@ export default class TextBox extends Vue {
 
 	@Prop({ default: 'input...' })
 	inputPlaceholder!: string
+
+	@Prop({ default: false})
+	inputRequired!: boolean
 
 	@Model('change') value!: string
 

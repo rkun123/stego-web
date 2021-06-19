@@ -1,6 +1,7 @@
 export type BaseUser = {
 	username: string,
 	email: string,
+	password: string,
 	avatar_url: string,
 	date_of_birth: Date,
 }
@@ -9,6 +10,7 @@ export type User = {
 	id: string,
 	username: string,
 	email: string,
+	password_hash: string,
 	avatar_url: string,
 	date_of_birth: Date,
 	created_at: Date

@@ -3,6 +3,7 @@
 		<input
 			class="date-picker"
 			type='date'
+			:required="inputRequired"
 			:name="inputPlaceholder"
 			@input="onValueChanged"
 			:value="value"
@@ -13,12 +14,15 @@
 import { Component, Prop, Model, Vue } from 'nuxt-property-decorator'
 
 @Component({})
-export default class TextBox extends Vue {
+export default class DatePicker extends Vue {
 	@Prop({ default: 'text'})
 	inputType!: 'text' | 'password'
 
 	@Prop({ default: 'input...' })
 	inputPlaceholder!: string
+
+	@Prop({ default: false})
+	inputRequired!: boolean
 
 	@Model('change') value!: string
 
