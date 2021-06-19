@@ -1,11 +1,17 @@
 <template>
 	<div class="container">
+		<post-filter />
 		{{ list }}
 	</div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-@Component({})
+import PostFilter from './PostFilter.vue'
+@Component({
+	components: {
+		PostFilter
+	}
+})
 export default class PostList extends Vue {
 	async fetch() {
 		console.debug(this.$store)

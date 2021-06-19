@@ -1,6 +1,6 @@
 import { MutationTree, ActionTree, GetterTree } from 'vuex'
 import { Module, VuexModule, Mutation, Action} from 'vuex-module-decorators'
-import { Post } from '../schemas'
+import { Post, Query } from '../schemas'
 import axiosCreator from '~/utils/axiosCreator'
 import { AxiosError } from 'axios'
 import process from 'process'
@@ -14,7 +14,8 @@ let $axios = axiosCreator(
 export type PostState = {
 	list: Post[],
 	fetching: boolean,
-	error?: string
+	error?: string,
+	query?: Query
 }
 
 @Module({
@@ -26,6 +27,7 @@ export default class PostModule extends VuexModule {
 	list: Post[] = []
 	fetching: boolean = false
 	error?: string
+	query?: Query
 
 	get getList() {
 		return this.list
@@ -44,6 +46,11 @@ export default class PostModule extends VuexModule {
 	@Mutation
 	setError(error: string) { 
 		this.error = error
+	}
+
+	@Mutation
+	setQuery(query: Query) {
+		this.query = query
 	}
 
 	@Action({ commit: 'setList'})

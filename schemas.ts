@@ -51,3 +51,28 @@ export type Post = {
 	seen_users: User[],
 	favorited_users: User[],
 }
+
+export const sortAttrOptions = [ "writing_time", "birthday", "seen", "velocity", "elevation", "position" ] as const
+type sortAttrOptionsTuple = typeof sortAttrOptions
+
+export type Query = {
+	sort: {
+    attr?: sortAttrOptionsTuple[number],
+    order?: "asc" | "desc"
+  },
+  filter: {
+    temperture?: {
+      max?: number,
+      min?: number
+    },
+    velocity?: {
+      max?: number,
+      min?: number
+    },
+    direction?: "up" | "down",
+    elevation?: {
+      max?: number,
+      min?: number
+    }
+  }
+}
