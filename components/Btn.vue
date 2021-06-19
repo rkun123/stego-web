@@ -1,5 +1,5 @@
 <template>
-	<button class="button">
+	<button class="button" @click="onClick">
 		<slot />
 	</button>
 </template>
@@ -8,7 +8,9 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component({})
 export default class Btn extends Vue {
-
+	onClick() {
+		this.$emit('click')
+	}
 }
 </script>
 <style scoped>
