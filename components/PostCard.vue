@@ -5,12 +5,10 @@
 
 		<span class="PostCard-UserDescription">
 			<h2 class="PostCard-UserDescription-Name">
-				C3太郎
+                {{ post.user.username }}
 			</h2>
 			<ol class="PostCard-UserDescription-Contents">
-				<p>hogehogehogehogehogehogehogehoge</p>
-				<p>hugahugahugahugahugahuga</p>
-				<p>piyopiyo</p>
+                {{ post.content }}
 			</ol>
 		</span>
 	</div>

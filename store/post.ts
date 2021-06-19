@@ -1,6 +1,6 @@
 import { MutationTree, ActionTree, GetterTree } from 'vuex'
 import { Module, VuexModule, Mutation, Action} from 'vuex-module-decorators'
-import { Post, Query } from '../schemas'
+import { BasePost, Post, Query } from '../schemas'
 import axiosCreator from '~/utils/axiosCreator'
 import { AxiosError } from 'axios'
 import process from 'process'
@@ -64,6 +64,22 @@ export default class PostModule extends VuexModule {
 		})
 		if (res) {
 			return res.data as Post[]
+		}
+	}
+
+	@Action({})
+	async postPost(post: BasePost) {
+		const token = this.context.rootGetters['user/getToken']
+		console.debug(this.context)
+		const axios = axiosCreator(BASE_URL, token)
+		const res = await axios.post('/api/v1/posts/',
+			post
+		)
+		.catch((e: AxiosError) => {
+			this.setError(e.message)
+		})
+		if (res?.status === 200) {
+			this.context.dispatch('post/fetchList')
 		}
 	}
 }

@@ -37,17 +37,6 @@ export default class PostInfo extends Vue {
 </script>
 <style scoped>
 
-	.info-container{
-		display 
-	}
-
-	.info-title{
-
-	}
-
-	.info-value{
-	}
-
 	#phone-shake{
 		content: url('https://api.iconify.design/fluent:phone-shake-24-regular.svg?height=24');
 		vertical-align: -0.125em;
