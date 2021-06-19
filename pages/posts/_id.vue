@@ -1,7 +1,23 @@
 <template>
   <div>
 
+
 	<post-card :post="post" />
+	
+	<span class="PostDetail">
+		<h2>
+			hogehogehugahuga
+		</h2>
+		<span class="PostDetail-Element">
+			hogehogehugahuga
+		</span>
+		<h2>
+			hogehogehugahuga
+		</h2>
+		<span class="PostDetail-Element">
+			hogehogehugahuga
+		</span>
+	</span>
 
 	<h2>Details</h2>
 		<post-info :post="post" />
@@ -97,6 +113,35 @@ export default class PostDetail extends Vue {
 
 <style scoped>
 
+
+	*{
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    .PostDetail{
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        background-color: red;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .PostDetail h2{
+        background-color: green;
+        padding-top: 15px;
+        padding: auto;
+    }
+
+    .PostDetail-Element{
+        background-color: purple;
+        padding: 10px;
+    } 
+
+
+
+	/* 以下パッケージ化するべきか悩む部分 */
 	#morning{
 		content: url('https://api.iconify.design/vaadin:morning.svg?height=16');
 		vertical-align: -0.125em;
