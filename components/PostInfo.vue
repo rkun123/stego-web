@@ -1,5 +1,6 @@
 <template>
 	<div>
+
 		<p>
 			<span id="temperature"></span>
 			temperature : {{post.temperature}} 
@@ -35,6 +36,17 @@ export default class PostInfo extends Vue {
 
 </script>
 <style scoped>
+
+	.info-container{
+		display 
+	}
+
+	.info-title{
+
+	}
+
+	.info-value{
+	}
 
 	#phone-shake{
 		content: url('https://api.iconify.design/fluent:phone-shake-24-regular.svg?height=24');
