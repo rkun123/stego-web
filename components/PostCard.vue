@@ -17,8 +17,8 @@
                 <span v-if="this.$route.name !== 'posts-id'">
                     <post-info :post="post" />
                     <div  @click="FavClicked">
-                        <Icon icon="mdi-heart" v-if="isFavoritedByMe"/>
-                        <Icon icon="mdi-heart-outline" v-if="!isFavoritedByMe"/>
+                        <Icon id="PostCard-UserDescription-FavIcon-like" icon="mdi-heart" v-if="isFavoritedByMe"/>
+                        <Icon id="PostCard-UserDescription-FavIcon-Unlike" icon="mdi-heart-outline" v-if="!isFavoritedByMe"/>
                         <!-- <span  id="PostCard-UserDescription-FavIcon"/> -->
                     </div>
                 </span>
@@ -128,14 +128,19 @@ export default class PostCard extends Vue {
         color: black;
     }
 
-    #PostCard-UserDescription-FavIcon{
+    #PostCard-UserDescription-FavIcon-like{
         width: 50px;
 		height : 50px;
 		margin: 10px;
         margin-left: 80%;
+        filter: invert(15%) sepia(95%) saturate(6932%) hue-rotate(358deg) brightness(95%) contrast(112%);
+    }
 
-		content: url('https://api.iconify.design/grommet-icons:favorite.svg?height=24');
-        vertical-align: -0.125em;
+    #PostCard-UserDescription-FavIcon-Unlike{
+        width: 50px;
+		height : 50px;
+		margin: 10px;
+        margin-left: 80%;
     }
 
 
