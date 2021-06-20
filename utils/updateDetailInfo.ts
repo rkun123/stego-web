@@ -10,7 +10,6 @@ export default async function updateDetailInfo(post: BasePost) {
 		...cachedGyro
 	}
 
-	alert(`Gyro: ${cachedGyro?.gyro_x}, ${cachedGyro?.gyro_y}, ${cachedGyro?.gyro_y}`)
 	return post
 }
 
