@@ -39,7 +39,7 @@ export default class NewPost extends Vue {
 	}
 
 	@Watch('post.content')
-	onContentChange(_, old: string) {
+	onContentChange(_: any, old: string) {
 		if(old === '') {
 			this.writeStartedAt = Date.now()
 		}
