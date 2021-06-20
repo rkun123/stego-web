@@ -7,7 +7,7 @@
 				temperature 
 			</span>
 			<span class="info-value" >
-				{{post.temperature}} 
+				{{post.temperature}} [°C] / {{post.temperature * 1.8 + 32}} [°F]
 			</span>
 		</li>
 
@@ -17,7 +17,7 @@
 				velocity
 			</span>
 			<span class="info-value">
-				{{post.velocity}}	
+				{{post.velocity}} [m/s]
 			</span>
 		</li>
 
@@ -27,7 +27,7 @@
 				direction
 			</span>
 			<span class="info-value">
-			 	{{post.direction}}
+			 	{{post.direction}} [m]
 			</span>
 		</li>
 
@@ -37,7 +37,7 @@
 				elevation
 			</span>
 			<span class="info-value">
-				{{post.elevation}}
+				{{post.elevation}} [m]
 			</span>
 		</li>
 		
@@ -47,7 +47,8 @@
 				latlng
 			</span>
 			<span class="info-value">
-				{{post.lat}}/{{post.lng}}
+				<p>lat : {{post.lat}} [°]</p>
+				<p>lng : {{post.lng}} [°]</p>
 			</span>
 		</li>
 
@@ -87,12 +88,12 @@ export default class PostInfo extends Vue {
 	}
 
 	.info-title{
-		flex-basis: 25%; 
+		flex-basis: 50%; 
 		margin-right: 30px;
 	}
 
 	.info-value{
-		flex-basis: 75%;
+		flex-basis: 50%;
 	}
 
 	.info-icons{

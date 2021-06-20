@@ -14,10 +14,10 @@
 			<post-date :post="post" />
 		</span>
 
-		<h2>posting speed</h2>
+		<!-- <h2>posting speed</h2>
 		<span class="PostDetail-Element">
 			<p>	{{post.user.created_at}}</p>	
-		</span>
+		</span> -->
 
 		<h2> Favorite </h2>
 		<span class="PostDetail-Element">
@@ -90,7 +90,8 @@ export default class PostDetail extends Vue {
 				created_at: new Date(),
 				updated_at: new Date()
 			},
-		]
+		],
+		created_at: new Date(),
 	}
 }
 </script>
@@ -106,19 +107,20 @@ export default class PostDetail extends Vue {
         display: flex;
         flex-direction: column;
         max-width: 100%;
-        background-color: red;
+        /* background-color: red; */
         padding-left: 30px;
         padding-right: 30px;
     }
 
     .PostDetail h2{
-        background-color: green;
+        /* background-color: green; */
         padding-top: 15px;
         padding: auto;
+		border-bottom: medium solid #000;
     }
 
     .PostDetail-Element{
-        background-color: purple;
+        /* background-color: purple; */
         padding: 10px;
     } 
 

@@ -3,9 +3,9 @@
 			
 		<p>
 			{{post.user.created_at}}
-			<span v-if="post.user.created_at.getHours() >= 0 && post.user.created_at.getHours() < 6" id="morning" />
-			<span v-else-if="post.user.created_at.getHours() >= 6 && post.user.created_at.getHours() < 12" id="day" />
-			<span v-else-if="post.user.created_at.getHours() >= 12 && post.user.created_at.getHours() < 18" id="evening" />
+			<span v-if="post.created_at.getHours() >= 0 && post.created_at.getHours() < 6" id="morning" />
+			<span v-else-if="post.created_at.getHours() >= 6 && post.created_at.getHours() < 12" id="day" />
+			<span v-else-if="post.created_at.getHours() >= 12 && post.created_at.getHours() < 18" id="evening" />
 			<span v-else id="night" />
 		</p>
 
