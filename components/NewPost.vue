@@ -27,8 +27,6 @@ export default class NewPost extends Vue {
 	post: BasePost = {
 		content: '',
 		writing_time: 0,
-		reply_to_id: '',
-		temperature: 0,
 		images: []
 	}
 
