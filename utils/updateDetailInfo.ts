@@ -9,6 +9,8 @@ export default async function updateDetailInfo(post: BasePost) {
 		...geo,
 		...cachedGyro
 	}
+
+	alert(`Gyro: ${cachedGyro?.gyro_x}, ${cachedGyro?.gyro_y}, ${cachedGyro?.gyro_y}`)
 	return post
 }
 
@@ -40,7 +42,7 @@ let cachedGyro: {
 function startSubscribeGyro () {
 	if(window.DeviceOrientationEvent) {
 
-		window.removeEventListener('deviceorientation', callback)
+		//window.removeEventListener('deviceorientation', callback)
 		window.addEventListener('deviceorientation', callback)
 
 		function callback(e: DeviceOrientationEvent) {

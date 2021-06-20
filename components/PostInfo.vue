@@ -52,6 +52,16 @@
 			</span>
 		</li>
 
+		<li v-show=" post.gyro_x != undefined ">
+			<span class="info-title">
+				<span id="phone-shaking" class="info-icons"/>
+				gyro
+			</span>
+			<span class="info-value">
+				{{post.gyro_x}}, {{ post.gyro_y}}, {{ post.gyro_z }} [°]
+			</span>
+		</li>
+
 		<li v-show=" post.writing_time != undefined "> 
 			<span class="info-title" >
 				<span id="writing-time" class="info-icons" />
