@@ -63,7 +63,12 @@ export default class PostModule extends VuexModule {
 
 	@Action({ commit: 'setList'})
 	async fetchList() {
-		const token = this.context.rootState.user.token
+		const token = localStorage.getItem('stego-jwt')
+		if(token === null) {
+			window.$nuxt.$router.push('/')
+			return
+		}
+		console.debug()
 		console.debug(this.context)
 		const axios = axiosCreator(BASE_URL, token)
 
@@ -89,7 +94,11 @@ export default class PostModule extends VuexModule {
 	@Action({})
 	async postPost(_post: BasePost) {
 		const post = await updateDetailInfo(_post)
-		const token = this.context.rootState.user.token
+		const token = localStorage.getItem('stego-jwt')
+		if(token === null) {
+			window.$nuxt.$router.push('/')
+			return
+		}
 		console.debug(this.context)
 		const axios = axiosCreator(BASE_URL, token)
 		const res = await axios.post('/api/v1/posts/',
