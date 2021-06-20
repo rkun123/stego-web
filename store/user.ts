@@ -97,16 +97,16 @@ export default class UserModule extends VuexModule {
 		return token
 	}
 
-	@Action({commit: 'setToken'})
-	async authByLocalStorage() {
-		const token = localStorage.getItem('stego-jwt')
+	@Action({})
+	async authByLocalStorage({token}: {token: string}) {
+		console.info(token)
+		this.setToken(token)
 		if(token === null) return
 		$axios = axiosCreator(
 			BASE_URL,
 			token
 		)
 		this.context.dispatch('fetchMe')
-		return token
 	}
 
 	@Action({ commit: 'setMe'})

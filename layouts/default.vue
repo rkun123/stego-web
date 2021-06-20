@@ -18,9 +18,12 @@ export default class Default extends Vue {
     return name ? name : this.$route.path
   }
 
-  async mounted() {
+  async beforeCreate() {
+    console.debug('beforeCreate')
     if(this.$route.path === '/') return
-    await this.$store.dispatch('user/authByLocalStorage')
+    console.debug('stego-jwt', localStorage.getItem('stego-jwt'))
+    const token = localStorage.getItem('stego-jwt')
+    await this.$store.dispatch('user/authByLocalStorage', {token})
     //if (!this.$store.getters['user/getToken']) this.$router.push('/')
   }
 }
