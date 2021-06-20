@@ -1,16 +1,18 @@
 <template>
 
 	<div class="PostCard">
-		<img class="PostCard-UserImage" v-bind:src="post.user.avatar_url">
+            <img class="PostCard-UserImage" v-bind:src="post.user.avatar_url">
 
-		<span class="PostCard-UserDescription">
-			<h2 class="PostCard-UserDescription-Name">
-                {{ post.user.username }}
-			</h2>
-			<ol class="PostCard-UserDescription-Contents">
-                {{ post.content }}
-			</ol>
-		</span>
+            <span class="PostCard-UserDescription">
+                <nuxt-link :to="`/posts/${post.id}`" >
+                    <h2 class="PostCard-UserDescription-Name">
+                        {{ post.user.username }}
+                    </h2>
+                </nuxt-link>
+                <ol class="PostCard-UserDescription-Contents">
+                    {{ post.content }}
+                </ol>
+            </span>
 	</div>
 
 </template>
@@ -67,6 +69,11 @@ export default class PostInfo extends Vue {
 
     .PostCard-UserDescription-Contents{
         background-color: white;
+    }
+
+    .PostCard-UserDescription a {
+        text-decoration: none;
+        color: black;
     }
 
 
