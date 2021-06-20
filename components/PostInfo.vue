@@ -1,7 +1,7 @@
 <template>
 	<div>
 	<ul  class="info-container">
-		<li>
+		<li v-show=" post.temperature != undefined ">
 			<span class="info-title" >
 				<span id="temperature" class="info-icons" />
 				temperature 
@@ -11,7 +11,7 @@
 			</span>
 		</li>
 
-		<li>
+		<li v-show=" post.velocity != undefined ">
 			<span class="info-title">
 				<span id="run-fast" class="info-icons"/>
 				velocity
@@ -21,7 +21,7 @@
 			</span>
 		</li>
 
-		<li>
+		<li v-show=" post.direction != undefined ">
 			<span class="info-title">
 				<span id="compass" class="info-icons"/>
 				direction
@@ -31,7 +31,7 @@
 			</span>
 		</li>
 
-		<li>
+		<li v-show=" post.elevation != undefined ">
 			<span class="info-title">
 				<span id="mountain" class="info-icons"/>
 				elevation
@@ -41,7 +41,7 @@
 			</span>
 		</li>
 		
-		<li>
+		<li v-show=" post.lat != undefined || post.lng != undefined ">
 			<span class="info-title">
 				<span id="phone-shaking" class="info-icons"/>
 				latlng
@@ -49,6 +49,16 @@
 			<span class="info-value">
 				<p>lat : {{post.lat}} [°]</p>
 				<p>lng : {{post.lng}} [°]</p>
+			</span>
+		</li>
+
+		<li v-show=" post.writing_time != undefined "> 
+			<span class="info-title" >
+				<span id="writing-time" class="info-icons" />
+				writing_time 
+			</span>
+			<span class="info-value" >
+				{{post.writing_time}} [s]
 			</span>
 		</li>
 
@@ -122,6 +132,10 @@ export default class PostInfo extends Vue {
 
 	#phone-shaking{
 		content: url('https://api.iconify.design/fluent:phone-shake-24-regular.svg?height=24');
+	}
+
+	#writing-time{
+		content: url('https://api.iconify.design/dashicons:welcome-write-blog.svg?height=20');
 	}
 
 </style>
