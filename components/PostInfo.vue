@@ -1,13 +1,13 @@
 <template>
 	<div>
 	<ul  class="info-container">
-		<li v-show=" post.temperature != undefined ">
+		<li v-show=" post.tempurture != undefined ">
 			<span class="info-title" >
 				<span id="temperature" class="info-icons" />
 				temperature 
 			</span>
 			<span class="info-value" >
-				{{post.temperature}} [°C] / {{post.temperature * 1.8 + 32}} [°F]
+				{{post.tempurture}} [°C] / {{post.tempurture * 1.8 + 32}} [°F]
 			</span>
 		</li>
 
