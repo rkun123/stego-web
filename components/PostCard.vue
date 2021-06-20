@@ -12,6 +12,11 @@
                 <ol class="PostCard-UserDescription-Contents">
                     {{ post.content }}
                 </ol>
+                
+                <!-- <span>{{this.$route.name}}</span> -->
+                <span v-if="this.$route.name !== 'posts-id'">
+                    <post-info :post="post" />
+                </span>
             </span>
 	</div>
 

@@ -17,6 +17,7 @@
 		<div>
 			<template v-for="(post, index) in list">
 				<post-card :post="post" :key="index"/>
+				
 			</template>
 		</div>
 	</div>

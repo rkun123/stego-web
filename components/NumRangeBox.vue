@@ -15,7 +15,6 @@ export default class NumRangeBox extends Vue {
 
 	@Prop({ default: 'min'})
 	minPlaceholder!: string
-
 	@Prop({ default: 'max'})
 	maxPlaceholder!: string
 
