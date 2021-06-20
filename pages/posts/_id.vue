@@ -71,7 +71,7 @@ export default class PostDetail extends Vue {
 	}
 
 	post: Post = {
-		temperature: 24,
+		tempurture: 24,
 		id: 'hogefugahogefuga',
 		content: 'あいうえおかきくけこ',
 		content_length: 10,
