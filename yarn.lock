@@ -973,6 +973,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@iconify/vue2@^1.0.0-alpha.1":
+  version "1.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@iconify/vue2/-/vue2-1.0.0-alpha.1.tgz#ea4e2983ffdc47cc0c8f042d7259b0bd384e148d"
+  integrity sha512-jFEgHx6kzMqQdEIhoRFcMdLUgaGQsrVB1YM4ij/kOjnidoRm7bBOMgH4g3TEvww+h6jKeoMAIUepBMfnkX1YlA==
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"

@@ -4,7 +4,9 @@
 			<new-post @close="closeNewPost"/>
 		</div>
 		<div class="fab-container">
-			<button @click="openNewPost" v-show="!isNewPostShow">+</button>
+			<div @click="openNewPost" class="fab" v-show="!isNewPostShow">
+				<icon icon="mdi-add" />
+			</div>
 		</div>
 
 		<post-filter />
@@ -19,10 +21,12 @@
 import { Vue, Component } from 'nuxt-property-decorator'
 import PostFilter from './PostFilter.vue'
 import PostCard from './PostCard.vue'
+import { Icon } from '@iconify/vue2'
 @Component({
 	components: {
 		PostFilter,
-		PostCard
+		PostCard,
+		Icon
 	}
 })
 export default class PostList extends Vue {
@@ -65,5 +69,7 @@ export default class PostList extends Vue {
 	background-color: #fff;
 	bottom: 10vh;
 	right: 10%;
+	font-size: 50px;
+	cursor: pointer;
 }
 </style>

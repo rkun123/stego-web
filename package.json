@@ -22,6 +22,7 @@
     "vuex-module-decorators": "^1.0.1"
   },
   "devDependencies": {
+    "@iconify/vue2": "^1.0.0-alpha.1",
     "@nuxt/types": "^2.15.3",
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^6.0.0",
