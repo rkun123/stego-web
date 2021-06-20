@@ -5,7 +5,7 @@ import process from 'process'
 import axios, { AxiosError } from 'axios'
 import Vue from 'vue'
 
-const BASE_URL = process.env.BASE_URL || 'http://localhost:8000'
+const BASE_URL = process.env.BASE_URL || 'https://stego.pigeons.house'
 
 let $axios = axiosCreator(
 	BASE_URL

@@ -69,13 +69,13 @@ export type Post = {
 	images: Image[]
 }
 
-export const sortAttrOptions = [ "writing_time", "birthday", "seen", "velocity", "elevation", "position" ] as const
+export const sortAttrOptions = [ "writing_time", "birthday", "seen", "velocity", "elevation" ] as const
 type sortAttrOptionsTuple = typeof sortAttrOptions
 
 export type Query = {
 	sort: {
-    attr?: sortAttrOptionsTuple[number],
-    order?: "asc" | "desc"
+    attr: sortAttrOptionsTuple[number],
+    order: "asc" | "desc"
   },
   filter: {
     temperture?: {

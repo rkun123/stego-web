@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<select @change="onChange">
+		<select :value="value" @change="onChange">
 			<template v-for="(option, index) in options">
 				<option :value="option" :key="index">
 					{{ option }}
@@ -10,12 +10,12 @@
 	</div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { Component, Vue, Prop, Model } from 'nuxt-property-decorator'
 
 @Component({})
 export default class Selector extends Vue {
 
-	@Prop({})
+	@Model('change')
 	value?: string
 
 	@Prop({})

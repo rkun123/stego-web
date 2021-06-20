@@ -2,11 +2,11 @@ import { MutationTree, ActionTree, GetterTree } from 'vuex'
 import { Module, VuexModule, Mutation, Action} from 'vuex-module-decorators'
 import { BasePost, Post, Query } from '../schemas'
 import axiosCreator from '~/utils/axiosCreator'
-import { AxiosError } from 'axios'
+import { AxiosResponse, AxiosError } from 'axios'
 import process from 'process'
 import updateDetailInfo from '~/utils/updateDetailInfo'
 
-const BASE_URL = process.env.BASE_URL || 'http://localhost:8000'
+const BASE_URL = process.env.BASE_URL || 'https://stego.pigeons.house'
 console.debug(process.env)
 
 let $axios = axiosCreator(
@@ -29,7 +29,13 @@ export default class PostModule extends VuexModule {
 	list: Post[] = []
 	fetching: boolean = false
 	error?: string
-	query?: Query
+	query: Query = {
+		sort: {
+			attr: 'birthday',
+			order: 'asc'
+		},
+		filter: {}
+	}
 
 	get getList() {
 		return this.list
@@ -60,7 +66,22 @@ export default class PostModule extends VuexModule {
 		const token = this.context.rootState.user.token
 		console.debug(this.context)
 		const axios = axiosCreator(BASE_URL, token)
-		const res = await axios.get('/api/v1/posts')
+
+		const res = await axios.get('/api/v1/posts/')
+			.catch((e: AxiosError) => {
+				this.setError(e.message)
+			})
+		if (res) {
+			return res.data as Post[]
+		}
+	}
+
+	@Action({ commit: 'setList'})
+	async fetchQueryList(query: Query) {
+		const token = this.context.rootState.user.token
+		console.debug(this.context)
+		const axios = axiosCreator(BASE_URL, token)
+		const res = await axios.post('/api/v1/posts/query', query)
 		.catch((e: AxiosError) => {
 			this.setError(e.message)
 		})
