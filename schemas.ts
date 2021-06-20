@@ -32,7 +32,7 @@ export type Image = {
 
 export type BasePost = {
 	content: string,
-	reply_to_id: string,
+	reply_to_id?: string,
 	temperature?: number,
 	writing_time: number,
 	lat?: number,
