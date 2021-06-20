@@ -33,9 +33,6 @@
 		{{user.created_at}}
 	</p> -->
 
-	<!-- <span @click=""> -->
-		
-	</span>
   </div>
 </template>
 
