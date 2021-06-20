@@ -62,6 +62,17 @@
 			</span>
 		</li>
 
+
+		<li v-show=" post.weather != undefined ">
+			<span class="info-title" >
+				<span id="weather" class="info-icons" />
+				weather
+			</span>
+			<span class="info-value">
+			 	{{post.weather}} 
+			</span>
+		</li>
+
 		</ul>
 	</div>
 </template>
@@ -136,6 +147,11 @@ export default class PostInfo extends Vue {
 
 	#writing-time{
 		content: url('https://api.iconify.design/dashicons:welcome-write-blog.svg?height=20');
+	}
+
+	#weather{
+		/* content: url('https://api.iconify.design/dashicons:welcome-write-blog.svg?height=20'); */
+		content: url('https://api.iconify.design/fluent:weather-hail-day-20-filled.svg?height=20');
 	}
 
 </style>
