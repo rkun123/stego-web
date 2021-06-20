@@ -92,6 +92,7 @@ export default class Filter extends Vue {
 			filter: {
 			}
 		}
+		q.filter = {}
 		if(this.sortAttr === '') q.sort = undefined
 		console.debug('temp', this.temperature)
 		if(this.temperature.op === '') {
