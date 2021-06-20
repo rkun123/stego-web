@@ -51,6 +51,7 @@ export default class PostDetail extends Vue {
 		user: {
 			id: 'foobarfoobar',
 			username: 'izumi',
+			password_hash: '',
 			email: 'izumi@example.com',
 			avatar_url: 'https://picsum.photos/480',
 			date_of_birth: new Date(),
@@ -70,6 +71,7 @@ export default class PostDetail extends Vue {
 			{
 				id: 'hogefugafoobar',
 				username: 'rkun',
+				password_hash: '',
 				email: 'rkun@example.com',
 				avatar_url: 'https://picsum.photos/480',
 				date_of_birth: new Date(),
@@ -81,6 +83,7 @@ export default class PostDetail extends Vue {
 			{
 				id: 'hogefugafoobar',
 				username: 'rkun',
+				password_hash: '',
 				email: 'rkun@example.com',
 				avatar_url: 'https://picsum.photos/480',
 				date_of_birth: new Date(),

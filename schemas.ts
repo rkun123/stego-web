@@ -44,7 +44,7 @@ export type BasePost = {
 	gyro_x?: number,
 	gyro_y?: number,
 	gyro_z?: number,
-	images: Image[]
+	images?: Image[]
 }
 
 export type Post = {
@@ -66,7 +66,7 @@ export type Post = {
 	gyro_z?: number,
 	seen_users: User[],
 	favorited_users: User[],
-	images: Image[]
+	images?: Image[]
 }
 
 export const sortAttrOptions = [ "writing_time", "birthday", "seen", "velocity", "elevation" ] as const
