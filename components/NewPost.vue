@@ -27,13 +27,28 @@ export default class NewPost extends Vue {
 	post: BasePost = {
 		content: '',
 		writing_time: 0,
+		reply_to_id: '',
+		temperature: 0,
 		images: []
 	}
+
+	writeStartedAt: number = Date.now()
+
 	close() {
 		this.$emit('close')
 	}
-	submit() {
-		this.$store.dispatch('post/postPost', this.post)
+
+	@Watch('post.content')
+	onContentChange(_, old: string) {
+		if(old === '') {
+			this.writeStartedAt = Date.now()
+		}
+	}
+	async submit() {
+		const writingTime = Date.now() - this.writeStartedAt
+		this.post.writing_time = writingTime
+		await this.$store.dispatch('post/postPost', this.post)
+		this.$emit('close')
 	}
 }
 </script>
