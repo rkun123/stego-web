@@ -71,15 +71,15 @@ export type Post = {
 	created_at?: Date,
 }
 
-export const sortAttrOptions = [ "writing_time", "birthday", "seen", "velocity", "elevation" ] as const
+export const sortAttrOptions = [ "writing_time", "birthday", "seen", "velocity", "elevation", ''] as const
 type sortAttrOptionsTuple = typeof sortAttrOptions
 
 export type Query = {
-	sort: {
+	sort?: {
     attr: sortAttrOptionsTuple[number],
     order: "asc" | "desc"
   },
-  filter: {
+  filter?: {
     temperture?: {
       max?: number,
       min?: number

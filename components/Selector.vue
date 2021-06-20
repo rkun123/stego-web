@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<select :value="value" @change="onChange">
-			<template v-for="(option, index) in options">
+			<template v-for="(option, index) in withUndefinedOptions">
 				<option :value="option" :key="index">
 					{{ option }}
 				</option>
@@ -20,6 +20,11 @@ export default class Selector extends Vue {
 
 	@Prop({})
 	options?: string[]
+
+	get withUndefinedOptions() {
+		if (this.options === undefined) return [undefined]
+		return [undefined, ...this.options]
+	}
 
 	onChange(e: InputEvent) {
 		const target = e.target as HTMLSelectElement

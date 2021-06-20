@@ -10,7 +10,7 @@ import Selector from './Selector.vue'
 import NumBox from './NumBox.vue'
 
 export type MinMax = {
-	op: 'min' | 'max',
+	op: 'min' | 'max' | '',
 	value: number
 }
 

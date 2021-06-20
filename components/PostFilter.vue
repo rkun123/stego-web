@@ -67,21 +67,21 @@ export default class Filter extends Vue {
 
 
 	temperature: MinMax = {
-		op: 'min',
+		op: '',
 		value: 0
 	}
 
 	velocity: MinMax = {
-		op: 'min',
+		op: '',
 		value: 0
 	}
 
 	elevation: MinMax = {
-		op: 'min',
+		op: '',
 		value: 0
 	}
 
-	direction: 'down' | 'up' = 'down'
+	direction: 'down' | 'up' | '' = 'down'
 
 	get query(): Query {
 		const q: Query = {
@@ -92,13 +92,28 @@ export default class Filter extends Vue {
 			filter: {
 			}
 		}
-		q.filter.temperture = {}
-		q.filter.temperture[this.temperature.op] = this.temperature.value
-		q.filter.velocity = {}
-		q.filter.velocity[this.velocity.op] = this.velocity.value
-		q.filter.elevation = {}
-		q.filter.elevation[this.elevation.op] = this.elevation.value
-		q.filter.direction = this.direction
+		if(this.sortAttr === '') q.sort = undefined
+		console.debug('temp', this.temperature)
+		if(this.temperature.op === '') {
+			q.filter.temperture = undefined
+		} else {
+			q.filter.temperture = {}
+			q.filter.temperture[this.temperature.op] = this.temperature.value
+		}
+		if(this.velocity.op === '') {
+			q.filter.velocity = undefined
+		}else{
+			q.filter.velocity = {}
+			q.filter.velocity[this.velocity.op] = this.velocity.value
+		}
+		if(this.elevation.op === '') {
+			q.filter.elevation = undefined
+		} else {
+			q.filter.elevation = {}
+			q.filter.elevation[this.elevation.op] = this.elevation.value
+		}
+		if(this.direction === '') q.filter.direction = undefined
+		else q.filter.direction = this.direction
 
 		return q
 	}
