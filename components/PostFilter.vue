@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="postfilter-container">
 		<div class="section">
 			<div class="title">Sort</div>
 			<div class="row">
@@ -115,6 +115,12 @@ export default class Filter extends Vue {
 }
 </script>
 <style scoped>
+.postfilter-container {
+	padding: 10px;
+	box-shadow: 0 0px 40px silver;
+	border-radius: 0 0 10px 10px;
+	margin-bottom: 40px;
+}
 .row {
 	display: flex;
 }

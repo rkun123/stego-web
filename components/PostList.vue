@@ -9,7 +9,11 @@
 			</div>
 		</div>
 
-		<post-filter />
+		<div class="post-filter-button" @click="isFilterShow = !isFilterShow">
+			<icon icon="mdi-chevron-up" v-if="isFilterShow"/>
+			<icon icon="mdi-chevron-down" v-if="!isFilterShow"/>
+		</div>
+		<post-filter v-show="isFilterShow" @close="isFilterShow = false" />
 		<div>
 			<template v-for="(post, index) in list">
 				<post-card :post="post" :key="index"/>
@@ -31,6 +35,7 @@ import { Icon } from '@iconify/vue2'
 })
 export default class PostList extends Vue {
 	isNewPostShow: boolean = false
+	isFilterShow: boolean = false
 
 	openNewPost() {
 		this.isNewPostShow = true
@@ -53,6 +58,7 @@ export default class PostList extends Vue {
 <style scoped>
 .container {
 	position: relative;
+	overflow: hidden;
 }
 .new-post-container {
 	position: fixed;
@@ -71,5 +77,11 @@ export default class PostList extends Vue {
 	right: 10%;
 	font-size: 50px;
 	cursor: pointer;
+}
+
+.post-filter-button {
+	width: 100%;
+	text-align: center;
+	font-size: 20px;
 }
 </style>

@@ -63,32 +63,24 @@ export default class PostModule extends VuexModule {
 
 	@Action({ commit: 'setList'})
 	async fetchList() {
-		if(this.query !== undefined) {
-			await this.context.dispatch('fetchQueryList')
-			return
-		}
 		const token = this.context.rootState.user.token
 		console.debug(this.context)
 		const axios = axiosCreator(BASE_URL, token)
 
-		const res = await axios.get('/api/v1/posts/')
+		let res: void | AxiosResponse
+
+		if(this.query !== undefined) {
+			res = await axios.post('/api/v1/posts/query', this.query)
 			.catch((e: AxiosError) => {
 				this.setError(e.message)
 			})
-		if (res) {
-			return res.data as Post[]
+		} else {
+			res = await axios.get('/api/v1/posts/')
+				.catch((e: AxiosError) => {
+					this.setError(e.message)
+				})
 		}
-	}
 
-	@Action({ commit: 'setList'})
-	async fetchQueryList() {
-		const token = this.context.rootState.user.token
-		console.debug(this.context)
-		const axios = axiosCreator(BASE_URL, token)
-		const res = await axios.post('/api/v1/posts/query', this.query)
-		.catch((e: AxiosError) => {
-			this.setError(e.message)
-		})
 		if (res) {
 			return res.data as Post[]
 		}
