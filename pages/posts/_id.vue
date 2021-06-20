@@ -42,7 +42,31 @@ import { Post } from '~/schemas'
 export default class PostDetail extends Vue {
 	// for debug: Mock post
 
-	
+
+	async created()
+	{
+		const id = this.$route.params.id;
+		const res = await this.$axios.get("https://stego.pigeons.house/api/v1/posts/search/" + id, {
+			headers: {
+				authorization: "Bearer " + this.$store.getters["user/getToken"]
+			}
+		});
+		console.debug(res);
+		if(res.status === 200)
+		{
+			const tmp = res.data as Post;
+			tmp.created_at = new Date(tmp.created_at!);
+			this.post = tmp;
+		}
+		else
+		{
+			this.$nuxt.error({
+				statusCode: 404,
+				message: "specified post was not found"
+			})
+		}
+	}
+
 	post: Post = {
 		temperature: 24,
 		id: 'hogefugahogefuga',
