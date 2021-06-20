@@ -16,6 +16,11 @@
                 <!-- <span>{{this.$route.name}}</span> -->
                 <span v-if="this.$route.name !== 'posts-id'">
                     <post-info :post="post" />
+                    <div  @click="FavClicked">
+                        <Icon icon="mdi-heart" v-if="isFavoritedByMe"/>
+                        <Icon icon="mdi-heart-outline" v-if="!isFavoritedByMe"/>
+                        <!-- <span  id="PostCard-UserDescription-FavIcon"/> -->
+                    </div>
                 </span>
             </span>
 	</div>
@@ -24,13 +29,55 @@
 
 <script lang="ts">
 
+import { AxiosResponse } from 'axios';
 import { Component, Vue, Prop} from 'nuxt-property-decorator'
-import { Post } from '~/schemas'
+import { Post, User } from '~/schemas'
+import { Icon } from '@iconify/vue2';
 
-@Component({})
+@Component({components: {Icon}})
 export default class PostCard extends Vue {
 	@Prop({})
+    
 	post!: Post
+
+    get isFavoritedByMe(){
+        const me = this.$store.getters["user/getMe"] as User;
+        return this.post.favorited_users.find(u => (u.id === me.id))
+    }
+
+    async FavClicked()
+    {
+		let res:AxiosResponse;
+        if(this.isFavoritedByMe){
+            
+            res = await this.$axios.delete("https://stego.pigeons.house/api/v1/posts/unfavorite/" + this.post.id, {
+                headers: {
+                    authorization: "Bearer " + localStorage.getItem("stego-jwt"),
+                }
+            });
+        }
+        else{
+            
+            res = await this.$axios.put("https://stego.pigeons.house/api/v1/posts/favorite/" + this.post.id,null, {
+                headers: {
+                    authorization: "Bearer " + localStorage.getItem("stego-jwt"),
+                }
+            });
+        }
+        
+		console.debug(res);
+		if(res.status === 200)
+		{
+            this.$store.dispatch("post/fetchList");
+		}
+		else
+		{
+			this.$nuxt.error({
+				statusCode: 404,
+				message: "specified post was not found"
+			})
+		} 
+    }
 }
 
 </script>
@@ -79,6 +126,16 @@ export default class PostCard extends Vue {
     .PostCard-UserDescription a {
         text-decoration: none;
         color: black;
+    }
+
+    #PostCard-UserDescription-FavIcon{
+        width: 50px;
+		height : 50px;
+		margin: 10px;
+        margin-left: 80%;
+
+		content: url('https://api.iconify.design/grommet-icons:favorite.svg?height=24');
+        vertical-align: -0.125em;
     }
 
 
