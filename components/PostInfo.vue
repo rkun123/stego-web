@@ -68,7 +68,7 @@
 				writing_time 
 			</span>
 			<span class="info-value" >
-				{{post.writing_time}} [s]
+				{{post.writing_time / 1000}} [s]
 			</span>
 		</li>
 
