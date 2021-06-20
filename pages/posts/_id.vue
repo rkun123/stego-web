@@ -24,12 +24,18 @@
 			<post-favorite :post="post" />
 		</span>
 
+		<nuxt-link to="/posts">戻る</nuxt-link>
+
 	</span>
 
 	<!--  dont have to edit why of this is a seen_users datas-->
 	<!-- <p v-for="user in post.seen_users" v-bind:key="user.email">
 		{{user.created_at}}
 	</p> -->
+
+	<!-- <span @click=""> -->
+		
+	</span>
   </div>
 </template>
 
