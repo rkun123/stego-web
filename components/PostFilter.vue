@@ -40,6 +40,10 @@
 				<Selector v-model="direction" :options="['down', 'up']" />
 			</div>
 		</div>
+		<div class="row">
+			<button @click="resetQuery">reset</button>
+			<button @click="updateQuery">confirm</button>
+		</div>
 	</div>
 </template>
 <script lang="ts">
@@ -99,10 +103,14 @@ export default class Filter extends Vue {
 		return q
 	}
 
-	@Watch('query')
-	onQueryChange() {
+	updateQuery() {
 		this.$store.commit('post/setQuery', this.query)
-		this.$store.dispatch('post/fetchQueryList', this.query)
+		this.$store.dispatch('post/fetchList')
+	}
+
+	resetQuery() {
+		this.$store.commit('post/setQuery', undefined)
+		this.$store.dispatch('post/fetchList')
 	}
 }
 </script>
