@@ -57,6 +57,7 @@ export default class PostList extends Vue {
 	bottom: 0;
 	width: 100%;
 	min-height: 20vh;
+	z-index: 2;
 }
 .fab-container {
 	position: fixed;
